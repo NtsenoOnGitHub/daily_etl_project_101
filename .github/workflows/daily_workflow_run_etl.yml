@@ -43,7 +43,7 @@ jobs:
 
       - name: Run ETL Script
         run: |
-          python scripts/Data_extraction.py
+          python Python_scripts/Data_extraction.py
 
       - name: Success message
         if: success()
