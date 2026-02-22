@@ -1,0 +1,21 @@
+# Ignore environment variables
+.env 
+
+# Ignore Python virtual environment
+venv/
+
+# Ignore temporary jupyter notebook
+Test_notebook.ipynb
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore Node modules
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore VS Code settings (optional)
+.vscode/
