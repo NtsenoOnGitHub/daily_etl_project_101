@@ -1,0 +1,40 @@
+
+name: Python Syntax Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check Python syntax
+        run: |
+          echo "Checking Python files for syntax errors..."
+
+          FILES=$(find . -type f -name "*.py")
+
+          if [ -z "$FILES" ]; then
+            echo "No Python files found."
+            exit 0
+          fi
+
+          for file in $FILES; do
+            echo "Checking $file"
+            python -m py_compile "$file"
+          done
+
+          echo "✅ All Python files passed syntax check."
