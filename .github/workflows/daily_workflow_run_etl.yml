@@ -1,0 +1,54 @@
+name: Daily ETL RUN
+
+on:
+  schedule:
+    - cron: "0 6  * * *"   # Runs daily at 06:00 UTC (08:00 Johannesburg)
+  workflow_dispatch:
+
+jobs:
+  run-etl:
+    name: Run ETL Job
+    runs-on: ubuntu-latest
+
+    env:
+      PYTHON_VERSION: "3.11"
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      API_KEY: ${{ secrets.API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "No requirements.txt found. Skipping dependency installation."
+          fi
+
+      - name: Run Python syntax check
+        run: |
+          python -m py_compile $(git ls-files '*.py')
+
+      - name: Run ETL Script
+        run: |
+          python scripts/Data_extraction.py
+
+      - name: Success message
+        if: success()
+        run: echo "ETL run completed successfully."
+
+      - name: Failure message
+        if: failure()
+        run: echo "ETL run failed."
