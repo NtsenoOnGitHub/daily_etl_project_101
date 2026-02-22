@@ -8,7 +8,7 @@ import os
 import json
 import boto3
 
-load_dotenv('config/.env') # This is only applicable for running the script locally.
+# load_dotenv('config/.env') # This is only applicable for running the script locally.
 MY_API_KEY = os.getenv('API_KEY')
 
 # - Extract data from Alpha Vantage using API call
