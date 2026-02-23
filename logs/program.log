@@ -22,3 +22,6 @@ Message 2026-02-21 13:13:40.043807: Data has been successfuly saved on the raw d
 Message 2026-02-21 13:33:39.277885: Data has been extracted successfuly from a public API on an API call
 Message 2026-02-21 13:33:39.304570: Data has been successfuly saved on the raw directory of the project
 Message 2026-02-21 13:36:42.145237: Transfromed Data has been successfuly saved on the processed directory of the project
+Message 2026-02-24 00:16:29.031815: Data has been extracted successfuly from a Alpha Vantage on an API call
+Successfully uploaded data/raw_data_2026-02-24.json to etl-project-s3-bucket-ntseno-2026/data/raw_data_2026-02-24.json
+Successfully uploaded logs/program.log to etl-project-s3-bucket-ntseno-2026/logs/program.log
