@@ -17,12 +17,13 @@ MY_API_KEY = os.getenv('API_KEY')
 
 def extract_data(API: str):
     try:
-        url = f'https://www.alphavantage.co/query?function=HISTORICAL_OPTIONS&symbol=IBM&date=2017-11-15&apikey=demo' #{API}
+        url = f'https://www.alphavantage.co/query?function=INSIDER_TRANSACTIONS&symbol=IBM&apikey={API}'
         r = requests.get(url)
         data = r.json()
         return data
-    except:
-        return 'Something went wrong' # replace this with logs functionality
+    except Exception as e:
+        log_message = f"API call Error: {e}\n"
+        log(log_message)
 # - 
 # - The returned json file will be saved in AWS S3 bucket
 def upload_to_s3(file_name: str, bucket_name: str, file_path):
