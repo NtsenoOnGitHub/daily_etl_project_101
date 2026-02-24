@@ -1,5 +1,6 @@
 import psycopg2
 import os
+import datetime
 from dotenv import load_dotenv
 from write_to_log import log
 from s3_file_upload import upload_to_s3
@@ -30,16 +31,19 @@ def db_call(query: str):
         conection.commit()
         cursor.close()
         connection.close()
-        log_message = f"Query executed succfully \n"
+        log_message = f"  Message {datetime.datetime.now()}: Query executed succfully \n"
         log(log_message)
     except Exception as e:
-        log_message = f"Database conection failed: {e}\n"
+        log_message = f"Error {datetime.datetime.now()}: Database conection failed: {e}\n"
         log(log_message)
+
+
+
+db_call(SQL_CREATE_TABLE)
 
     upload_to_s3('logs/program.log', 
                  'etl-project-s3-bucket-ntseno-2026', 
                  'logs/program.log')
 
-db_call(SQL_CREATE_TABLE)
 
 
