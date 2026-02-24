@@ -50,9 +50,13 @@ jobs:
         run: |
           python -m py_compile $(git ls-files '*.py')
 
-      - name: Run ETL Script
+      - name: Run ETL Script_extract
         run: |
           python Python_Scripts/Data_extraction.py
+
+      - name: Run ETL Script_load
+        run: |
+          python Python_Scripts/Data_load.py
 
       - name: Success message
         if: success()
