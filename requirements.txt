@@ -26,6 +26,7 @@ parso==0.8.6
 platformdirs==4.9.2
 prompt_toolkit==3.0.52
 psutil==7.2.2
+psycopg2==2.9.11
 pure_eval==0.2.3
 Pygments==2.19.2
 python-dateutil==2.9.0.post0
@@ -37,6 +38,7 @@ six==1.17.0
 stack-data==0.6.3
 tornado==6.5.4
 traitlets==5.14.3
+typing_extensions==4.15.0
 tzdata==2025.3
 urllib3==2.6.3
 wcwidth==0.6.0
