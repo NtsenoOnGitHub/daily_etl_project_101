@@ -2,6 +2,7 @@ import psycopg2
 import os
 from dotenv import load_dotenv
 from write_to_log import log
+from s3_file_upload import upload_to_s3
 
 DB_HOST = os.getenv('AWS_DB_HOST')
 DB_PORT = os.getenv('AWS_DB_PORT')
@@ -35,4 +36,7 @@ def db_call(query: str):
         log_message = f"Database conection failed: {e}\n"
         log(log_message)
 
+upload_to_s3()
+
 db_call(SQL_CREATE_TABLE)
+
