@@ -25,16 +25,26 @@ SQL_CREATE_TABLE = """CREATE TABLE IF NOT EXIST insder_transactions (
 
 def db_call(query: str):
     try:
-        db_connection = psycopg2.connect(host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD)
-        cursor = db_connection.cursor()
+        connection = psycopg2.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            dbname=DB_NAME,
+            user=DB_USER,
+            password=DB_PASSWORD
+        )
+
+        cursor = connection.cursor()
         cursor.execute(query)
-        db_connection.commit()
+        connection.commit()
+
         cursor.close()
-        db_connection.close()
-        log_message = f"  Message {datetime.datetime.now()}: Query executed succfully \n"
+        connection.close()
+
+        log_message = f"Message {datetime.datetime.now()}: Query executed successfully\n"
         log(log_message)
+
     except Exception as e:
-        log_message = f"Error {datetime.datetime.now()}: Database conection failed: {e}\n"
+        log_message = f"Error {datetime.datetime.now()}: Database connection failed: {e}\n"
         log(log_message)
         raise
 
@@ -43,6 +53,7 @@ def db_call(query: str):
 db_call(SQL_CREATE_TABLE)
 
 upload_to_s3('logs/program.log', 'etl-project-s3-bucket-ntseno-2026', 'logs/program.log')
+
 
 
 
