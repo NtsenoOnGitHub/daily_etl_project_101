@@ -36,12 +36,14 @@ def db_call(query: str):
     except Exception as e:
         log_message = f"Error {datetime.datetime.now()}: Database conection failed: {e}\n"
         log(log_message)
+        raise
 
 
 
 db_call(SQL_CREATE_TABLE)
 
 upload_to_s3('logs/program.log', 'etl-project-s3-bucket-ntseno-2026', 'logs/program.log')
+
 
 
 
