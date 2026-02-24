@@ -36,7 +36,10 @@ def db_call(query: str):
         log_message = f"Database conection failed: {e}\n"
         log(log_message)
 
-upload_to_s3()
+    upload_to_s3('logs/program.log', 
+                 'etl-project-s3-bucket-ntseno-2026', 
+                 'logs/program.log')
 
 db_call(SQL_CREATE_TABLE)
+
 
