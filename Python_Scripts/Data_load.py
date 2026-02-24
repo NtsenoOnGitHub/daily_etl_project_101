@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 from write_to_log import log
 from s3_file_upload import upload_to_s3
 
-DB_HOST = os.getenv('AWS_DB_HOST')
-DB_PORT = int(os.getenv('AWS_DB_PORT'))
-DB_NAME = os.getenv('AWS_DB_NAME')
-DB_USER = os.getenv('AWS_DB_USER')
-DB_PASSWORD = os.getenv('AWS_DB_PASSWORD')
+AWS_DB_HOST = os.getenv('AWS_DB_HOST')
+AWS_DB_PORT = int(os.getenv('AWS_DB_PORT'))
+AWS_DB_NAME = os.getenv('AWS_DB_NAME')
+AWS_DB_USER = os.getenv('AWS_DB_USER')
+AWS_DB_PASSWORD = os.getenv('AWS_DB_PASSWORD')
 
 SQL_CREATE_TABLE = """CREATE TABLE IF NOT EXIST insder_transactions (
                             transaction_date TIMESTAMP,
@@ -26,11 +26,11 @@ SQL_CREATE_TABLE = """CREATE TABLE IF NOT EXIST insder_transactions (
 def db_call(query: str):
     try:
         connection = psycopg2.connect(
-            host=DB_HOST,
-            port=DB_PORT,
-            dbname=DB_NAME,
-            user=DB_USER,
-            password=DB_PASSWORD
+            host=AWS_DB_HOST,
+            port=AWS_DB_PORT,
+            dbname=AWS_DB_NAME,
+            user=AWS_DB_USER,
+            password=AWS_DB_PASSWORD
         )
 
         cursor = connection.cursor()
@@ -53,6 +53,7 @@ def db_call(query: str):
 db_call(SQL_CREATE_TABLE)
 
 upload_to_s3('logs/program.log', 'etl-project-s3-bucket-ntseno-2026', 'logs/program.log')
+
 
 
 
