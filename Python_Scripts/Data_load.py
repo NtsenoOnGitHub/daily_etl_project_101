@@ -6,7 +6,7 @@ from write_to_log import log
 from s3_file_upload import upload_to_s3
 
 AWS_DB_HOST = os.getenv('AWS_DB_HOST')
-AWS_DB_PORT = int(os.getenv('AWS_DB_PORT'))
+AWS_DB_PORT = os.getenv('AWS_DB_PORT')
 AWS_DB_NAME = os.getenv('AWS_DB_NAME')
 AWS_DB_USER = os.getenv('AWS_DB_USER')
 AWS_DB_PASSWORD = os.getenv('AWS_DB_PASSWORD')
@@ -53,6 +53,7 @@ def db_call(query: str):
 db_call(SQL_CREATE_TABLE)
 
 upload_to_s3('logs/program.log', 'etl-project-s3-bucket-ntseno-2026', 'logs/program.log')
+
 
 
 
