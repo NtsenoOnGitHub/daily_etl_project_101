@@ -25,12 +25,12 @@ SQL_CREATE_TABLE = """CREATE TABLE IF NOT EXIST insder_transactions (
 
 def db_call(query: str):
     try:
-        db_connection = psycopg2.connect(host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASWORD)
-        cursor = connection.cursor()
+        db_connection = psycopg2.connect(host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PAsSWORD)
+        cursor = db_connection.cursor()
         cursor.execute(query)
-        conection.commit()
+        db_connection.commit()
         cursor.close()
-        connection.close()
+        db_connection.close()
         log_message = f"  Message {datetime.datetime.now()}: Query executed succfully \n"
         log(log_message)
     except Exception as e:
@@ -42,6 +42,7 @@ def db_call(query: str):
 db_call(SQL_CREATE_TABLE)
 
 upload_to_s3('logs/program.log', 'etl-project-s3-bucket-ntseno-2026', 'logs/program.log')
+
 
 
 
