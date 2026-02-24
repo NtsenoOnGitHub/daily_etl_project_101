@@ -41,9 +41,8 @@ def db_call(query: str):
 
 db_call(SQL_CREATE_TABLE)
 
-    upload_to_s3('logs/program.log', 
-                 'etl-project-s3-bucket-ntseno-2026', 
-                 'logs/program.log')
+upload_to_s3('logs/program.log', 'etl-project-s3-bucket-ntseno-2026', 'logs/program.log')
+
 
 
 
