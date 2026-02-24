@@ -9,7 +9,7 @@ DB_HOST = os.getenv('AWS_DB_HOST')
 DB_PORT = os.getenv('AWS_DB_PORT')
 DB_NAME = os.getenv('AWS_DB_NAME')
 DB_USER = os.getenv('AWS_DB_USER')
-DB_PASWORD = os.getenv('AWS_DB_PASSWORD')
+DB_PASSWORD = os.getenv('AWS_DB_PASSWORD')
 
 SQL_CREATE_TABLE = """CREATE TABLE IF NOT EXIST insder_transactions (
                             transaction_date TIMESTAMP,
@@ -25,7 +25,7 @@ SQL_CREATE_TABLE = """CREATE TABLE IF NOT EXIST insder_transactions (
 
 def db_call(query: str):
     try:
-        db_connection = psycopg2.connect(host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PAsSWORD)
+        db_connection = psycopg2.connect(host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD)
         cursor = db_connection.cursor()
         cursor.execute(query)
         db_connection.commit()
@@ -43,6 +43,7 @@ def db_call(query: str):
 db_call(SQL_CREATE_TABLE)
 
 upload_to_s3('logs/program.log', 'etl-project-s3-bucket-ntseno-2026', 'logs/program.log')
+
 
 
 
